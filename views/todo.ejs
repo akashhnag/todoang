@@ -1,20 +1,19 @@
-<html>
+<html ng-app="myapp">
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
   <script src="assets/jquery-3.2.1.min.js"></script>
   <script src="assets/todo-list.js"></script>
   <link rel="stylesheet" href="assets/styles.css" type="text/css">
 </head>
-<body>
+<body ng-controller="todoController">
   <!--<h1><img src="assets/logo.png"></h1>-->
   <div id="todo-table">
-    <form>
-      <input type="text" name="item" placeholder="Add item..." required/>
-      <button type="submit">ADD</button>
+    <form name="todoForm">
+      <input type="text" name="item" placeholder="Add item..." ng-model="item" ng-required="true"/>
+      <button ng-disabled="todoForm.$invalid" ng-click="add()">ADD</button>
     </form>
     <ul>
-      <% for(var i=0;i < todos.length;i++){%>
-        <li><%=todos[i].item%></li>
-        <%}%>
+      <li ng-repeat="todo in todos" ng-click="del(todo)">{{todo.item}}</li>
     </ul>
   </div>
 </body>
